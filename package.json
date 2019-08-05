@@ -4,9 +4,10 @@
   "description": "server",
   "main": "index.js",
   "scripts": {
-    "watch": "nodemon index.js",
-    "start": "node index.js",
-    "test": "jest --verbose"
+    "watch": "NODE_ENV=development nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,11 @@
     "mongoose": "^5.6.7"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
     "jest": "^24.8.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
