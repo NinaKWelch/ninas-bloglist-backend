@@ -56,6 +56,12 @@ describe('blog list', () => {
     )
   })
 
+  test('if blog has no likes the value defaults to 0', async () => {
+    const response = await api.get('/api/blogs')
+
+    expect(response.body[1].likes).toEqual(0)
+  })
+
   afterAll(() => {
     mongoose.connection.close()
   })
