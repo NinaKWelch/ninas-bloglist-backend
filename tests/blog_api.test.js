@@ -33,6 +33,29 @@ describe('blog list', () => {
     expect(response.body[0].id).toBeDefined()
   })
 
+  test('a new blog can be added', async () => {
+    const newBlog = {
+      title: 'Canonical string reduction',
+      author: 'Edsger W. Dijkstra',
+      url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+      likes: 12
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd.length).toBe(helper.initialBlogs.length + 1)
+
+    const blogTitles = blogsAtEnd.map(blog => blog.title)
+    expect(blogTitles).toContain(
+      'Canonical string reduction'
+    )
+  })
+
   afterAll(() => {
     mongoose.connection.close()
   })
