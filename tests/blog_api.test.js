@@ -27,6 +27,12 @@ describe('blog list', () => {
     expect(response.body.length).toBe(helper.initialBlogs.length)
   })
 
+  test('the unique identification of a blog is named id', async () => {
+    const response = await api.get('/api/blogs')
+
+    expect(response.body[0].id).toBeDefined()
+  })
+
   afterAll(() => {
     mongoose.connection.close()
   })
