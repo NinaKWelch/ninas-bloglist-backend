@@ -97,6 +97,23 @@ describe('when there are some blogs', () => {
         expect(titles).not.toContain(blogToDelete.title)
       })
     })
+
+    describe('updating a blog', () => {
+      test('successflly updates a blog', async () => {
+        const blogsAtStart = await helper.blogsInDb()
+        // eslint-disable-next-line prefer-destructuring
+        const blogToChange = blogsAtStart[1]
+
+        blogToChange.likes += 1
+        console.log(blogToChange)
+
+        await api
+          .put(`/api/blogs/${blogToChange.id}`)
+          .expect(200)
+
+        expect(blogToChange.likes).toBe(1)
+      })
+    })
   })
 })
 
