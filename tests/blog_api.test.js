@@ -62,6 +62,18 @@ describe('blog list', () => {
     expect(response.body[1].likes).toEqual(0)
   })
 
+  test('response to a blog without title or url is status code 400', async () => {
+    const newBlog = {
+      author: 'Robert C. Martin',
+      likes: 10
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+  })
+
   afterAll(() => {
     mongoose.connection.close()
   })
