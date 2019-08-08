@@ -5,6 +5,8 @@ const app = require('../app')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
+const User = require('../models/user')
+
 const helper = require('./test_helper')
 
 beforeEach(async () => {
@@ -114,6 +116,31 @@ describe('when there are some blogs', () => {
         expect(blogToChange.likes).toBe(1)
       })
     })
+  })
+})
+
+describe('when there are no users', () => {
+  beforeEach(async () => {
+    await User.deleteMany({})
+  })
+
+  test('creating a new user is successful', async () => {
+    const newUser = {
+      username: 'nina',
+      name: 'Nina Welch',
+      password: 'ninaspw'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/users')
+
+    expect(response.body.length).toBe(1)
+    expect(response.body[0].username).toEqual(newUser.username)
   })
 })
 
