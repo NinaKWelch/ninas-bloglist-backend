@@ -16,6 +16,7 @@ usersRouter.get('/', async (request, response) => {
 
 // eslint-disable-next-line consistent-return
 usersRouter.post('/', async (request, response, next) => {
+  // eslint-disable-next-line prefer-destructuring
   const body = request.body
 
   if (!body.username || !body.password) {

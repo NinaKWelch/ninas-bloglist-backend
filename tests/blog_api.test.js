@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+
 const app = require('../app')
 
 const api = supertest(app)
@@ -119,7 +120,7 @@ describe('when there are some blogs', () => {
   })
 })
 
-describe('when there are no users', () => {
+describe('when database has no users', () => {
   beforeEach(async () => {
     await User.deleteMany({})
   })
@@ -173,6 +174,8 @@ describe('when there are no users', () => {
     expect(response.body.length).toBe(0)
   })
 })
+
+// write test for successful user login
 
 afterAll(() => {
   mongoose.connection.close()
