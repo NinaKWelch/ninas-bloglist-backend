@@ -142,6 +142,36 @@ describe('when there are no users', () => {
     expect(response.body.length).toBe(1)
     expect(response.body[0].username).toEqual(newUser.username)
   })
+
+  test('fails with status code 400 if password is missing', async () => {
+    const newUser = {
+      username: 'dummy'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+
+    const response = await api.get('/api/users')
+
+    expect(response.body.length).toBe(0)
+  })
+
+  test('fails with status code 400 if username is missing', async () => {
+    const newUser = {
+      password: 'dummypw'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+
+    const response = await api.get('/api/users')
+
+    expect(response.body.length).toBe(0)
+  })
 })
 
 afterAll(() => {
