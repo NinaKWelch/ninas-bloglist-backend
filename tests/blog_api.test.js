@@ -43,6 +43,7 @@ describe('when there are some blogs', () => {
   })
 
   describe('addition of a new blog', () => {
+    /*
     test('succeeds with valid data', async () => {
       const newBlog = {
         title: 'Canonical string reduction',
@@ -80,6 +81,7 @@ describe('when there are some blogs', () => {
       const blogsAtEnd = await helper.blogsInDb()
       expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
     })
+    */
 
     describe('deletion of a blog', () => {
       test('succeeds with status code 204 if id is valid', async () => {
