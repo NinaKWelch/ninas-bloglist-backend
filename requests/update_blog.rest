@@ -1,10 +1,10 @@
 PUT http://localhost:3003/api/blogs/5d4c4095220c3d92e7024e35
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjVkNGMzZmU0MjIwYzNkOTJlNzAyNGUzMiIsImlhdCI6MTU2NTI3ODI3Mn0.HaNIl87Mvt3wE3-oiH3dpXlUSoJvwG-p4Bv6f5_x0Vo
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjVkNGMzZmU0MjIwYzNkOTJlNzAyNGUzMiIsImlhdCI6MTU2NTM4NzM4OX0.vXsdJni1ZmnllT_UNv4Z2oBZGpKgNp9ylvTTY7GjVrg
 
 {   
-    "likes": 1,
-    "title": "Dummy Blog",
-    "author": "Dummy",
-    "url": "http://dummy.com"
+  "likes": 3,
+  "title": "Dummy Blog",
+  "author": "Dummy",
+  "url": "http://dummy.com"
 }
