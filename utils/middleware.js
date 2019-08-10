@@ -12,7 +12,7 @@ const tokenExtractor = (request, response, next) => {
   // eslint-disable-next-line no-shadow
   const getTokenFrom = request => {
     const authorization = request.get('authorization')
-    console.log(authorization)
+
     if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
       // add token only (bearer is removed)
       request.token = authorization.substring(7)
@@ -23,7 +23,6 @@ const tokenExtractor = (request, response, next) => {
   getTokenFrom(request)
   next()
 }
-
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })

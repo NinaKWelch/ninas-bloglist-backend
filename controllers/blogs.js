@@ -11,18 +11,12 @@ blogsRouter.get('/', async (request, response) => {
       name: 1
     }
   )
-
   response.json(blogs.map(blog => blog.toJSON()))
 })
 
-// eslint-disable-next-line consistent-return
 blogsRouter.post('/', async (request, response, next) => {
   try {
     const decodedToken = jwt.verify(request.token, process.env.SECRET)
-    if (!request.token || !decodedToken.id) {
-      return response.status(401).json({ error: 'token missing or invalid' })
-    }
-
     const user = await User.findById(decodedToken.id)
 
     const blog = new Blog(request.body)
@@ -39,8 +33,18 @@ blogsRouter.post('/', async (request, response, next) => {
 
 blogsRouter.delete('/:id', async (request, response, next) => {
   try {
-    await Blog.findByIdAndRemove(request.params.id)
-    response.status(204).end()
+    const decodedToken = jwt.verify(request.token, process.env.SECRET)
+    const user = await User.findById(decodedToken.id)
+    const blog = await Blog.findById(request.params.id)
+
+    if (!blog) {
+      response.status(404).json({ error: 'blog does not exist' })
+    }
+
+    if (user._id.toString() === blog.user.toString()) {
+      await blog.remove()
+      response.status(204).end()
+    }
   } catch (exception) {
     next(exception)
   }
