@@ -30,6 +30,8 @@ const unknownEndpoint = (request, response) => {
 
 // eslint-disable-next-line consistent-return
 const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
     return response.status(400).send({
       error: 'malformatted id'
@@ -48,7 +50,6 @@ const errorHandler = (error, request, response, next) => {
     })
   }
 
-  logger.error(error.message)
   next(error)
 }
 

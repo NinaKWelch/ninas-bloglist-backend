@@ -20,7 +20,7 @@ usersRouter.post('/', async (request, response, next) => {
 
   if (!body.username || !body.password) {
     return response.status(400).json({
-      error: 'username or password is missing'
+      error: 'missing username or password'
     })
   }
 
