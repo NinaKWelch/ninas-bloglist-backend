@@ -16,12 +16,14 @@ blogsRouter.get('/', async (request, response) => {
 
 blogsRouter.post('/', async (request, response, next) => {
   try {
-    /* temporary solution for tests to pass
+    /*
+    // temporary solution for tests to pass
     if (process.env.TEST_MONGODB_URI) {
       const blog = new Blog(request.body)
       const savedBlog = await blog.save()
       response.status(201).json(savedBlog.toJSON())
-    } */
+    }
+    */
 
     const decodedToken = jwt.verify(request.token, process.env.SECRET)
     const user = await User.findById(decodedToken.id)
@@ -40,7 +42,8 @@ blogsRouter.post('/', async (request, response, next) => {
 
 blogsRouter.delete('/:id', async (request, response, next) => {
   try {
-    /* temporary solution for tests to pass
+    /*
+    // temporary solution for tests to pass
     if (process.env.TEST_MONGODB_URI) {
       const blog = await Blog.findByIdAndRemove(request.params.id)
 
@@ -49,7 +52,8 @@ blogsRouter.delete('/:id', async (request, response, next) => {
       }
 
       response.status(204).end()
-    } */
+    }
+    */
 
     const decodedToken = jwt.verify(request.token, process.env.SECRET)
     const user = await User.findById(decodedToken.id)

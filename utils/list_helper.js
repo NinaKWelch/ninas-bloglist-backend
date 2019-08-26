@@ -73,7 +73,7 @@ const totalLikes = blogs => reduceBy(blogs, 'likes')
 const favoriteBlog = blogs => {
   sortBy(blogs, 'likes')
 
-  return blogs.length === 0 ? {} : {
+  return blogs.length === 0 ? null : {
     title: blogs[0].title,
     author: blogs[0].author,
     likes: blogs[0].likes
@@ -82,11 +82,11 @@ const favoriteBlog = blogs => {
 
 const mostBlogs = blogs => (blogs.length !== 0
   ? findAuthorWithMost(blogs, 'blogs')
-  : 'no authors')
+  : null)
 
 const mostLikes = blogs => (blogs.length !== 0
   ? findAuthorWithMost(blogs, 'likes')
-  : 'no likes')
+  : null)
 
 module.exports = {
   dummy,
