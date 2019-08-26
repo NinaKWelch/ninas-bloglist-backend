@@ -16,9 +16,6 @@ const loginRouter = require('./controllers/login')
 
 const mongoUrl = config.MONGODB_URI
 
-app.use(cors())
-app.use(bodyParser.json())
-
 logger.info('connecting to', mongoUrl)
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
@@ -29,6 +26,8 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true, useFin
     logger.error('error connection to MongoDB:', error.message)
   })
 
+app.use(cors())
+app.use(bodyParser.json())
 app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
 
