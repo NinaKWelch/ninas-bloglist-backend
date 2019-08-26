@@ -8,19 +8,34 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
+/*
 const tokenExtractor = (request, response, next) => {
   // eslint-disable-next-line no-shadow
   const getTokenFrom = request => {
     const authorization = request.get('authorization')
-
     if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
       // add token only (bearer is removed)
       request.token = authorization.substring(7)
     }
     return null
   }
-
   getTokenFrom(request)
+  next()
+}
+*/
+
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    // add token only (bearer is removed)
+    return authorization.substring(7)
+  }
+  return null
+}
+
+const tokenExtractor = (request, response, next) => {
+  request.token = getTokenFrom(request)
   next()
 }
 
