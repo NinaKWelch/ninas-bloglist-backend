@@ -65,6 +65,12 @@ const errorHandler = (error, request, response, next) => {
     })
   }
 
+  if (error.name === 'TypeError') {
+    return response.status(401).json({
+      error: 'invalid request'
+    })
+  }
+
   next(error)
 }
 
