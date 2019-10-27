@@ -85,6 +85,23 @@ blogsRouter.post('/', async (request, response, next) => {
   }
 })
 
+blogsRouter.post('/:id/comments', async (request, response, next) => {
+  try {
+    const blog = await Blog.findById(request.params.id)
+
+    const comment = new Comment({ content: request.body.content })
+    comment.blog = blog._id
+
+    const savedComment = await comment.save()
+    blog.comments = blog.comments.concat(savedComment._id)
+    await blog.save()
+
+    response.status(201).json(savedComment.toJSON())
+  } catch (exception) {
+    next(exception)
+  }
+})
+
 blogsRouter.delete('/:id', async (request, response, next) => {
   try {
     /*
@@ -116,24 +133,8 @@ blogsRouter.put('/:id', async (request, response, next) => {
 
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+
     response.status(200).json(updatedBlog.toJSON())
-  } catch (exception) {
-    next(exception)
-  }
-})
-
-blogsRouter.post('/:id/comments', async (request, response, next) => {
-  try {
-    const blog = await Blog.findById(request.params.id)
-
-    const comment = new Comment({ content: request.body.content })
-    comment.blog = blog._id
-    const savedComment = await comment.save()
-
-    blog.comments = blog.comments.concat(savedComment._id)
-    await blog.save()
-
-    response.status(201).json(savedComment.toJSON())
   } catch (exception) {
     next(exception)
   }
