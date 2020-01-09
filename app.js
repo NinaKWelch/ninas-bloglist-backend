@@ -21,7 +21,12 @@ app.use(bodyParser.json())
 
 logger.info('connecting to', mongoUrl)
 
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
+mongoose.connect(mongoUrl, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+})
   .then(() => {
     logger.info('connected to MongoDB')
   })
@@ -35,6 +40,12 @@ app.use(middleware.tokenExtractor)
 app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
+
+if (process.env.NODE_ENV === 'test') {
+  // eslint-disable-next-line global-require
+  const testingRouter = require('./controllers/tests')
+  app.use('/api/tests', testingRouter)
+}
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
