@@ -8,7 +8,7 @@
     "watch": "NODE_ENV=development nodemon index.js",
     "build:ui": "rm -rf build && cd ../ninas-bloglist && npm run build --prod && cp -r build ../ninas-bloglist-backend/",
     "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "heroku logs --tail",
     "test": "NODE_ENV=test jest --verbose --runInBand",
     "start:test": "NODE_ENV=test node index.js",
@@ -24,19 +24,19 @@
   "author": "Nina Welch",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^3.0.8",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.6",
+    "mongoose": "^5.9.6",
     "mongoose-unique-validator": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.19.1",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
     "jest": "^24.9.0",
     "nodemon": "^2.0.2",
     "supertest": "^4.0.2"
