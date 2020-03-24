@@ -1,4 +1,3 @@
-# ninas-bloglist-backend
 # Backend for Bloglist App
 
 Front-end React app repository at https://github.com/NinaKWelch/ninas-bloglist
