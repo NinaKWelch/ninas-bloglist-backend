@@ -4,7 +4,7 @@ Front-end React app repository at https://github.com/NinaKWelch/ninas-bloglist
 
 ## Heroku website
 
-https://vast-wave-20661.herokuapp.com/
+https://ninas-bloglist.herokuapp.com
 
 ## Development server
 
